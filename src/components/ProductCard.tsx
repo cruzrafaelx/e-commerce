@@ -3,7 +3,7 @@ import type { Product } from "../types"
 
 type ProductCardProps = Omit<Product, "id">
 
-const ProductCard = ({ title, price, description, category, image }: ProductCardProps) => {
+const ProductCard = ({ title, price, description, category, image, rating }: ProductCardProps) => {
 
     const [isFavorite, setIsFavorite] = useState(false)
     
@@ -16,7 +16,8 @@ const ProductCard = ({ title, price, description, category, image }: ProductCard
             <h3 className="text-xl font-bold">{title}</h3>
             <p className="text-sm text-gray-500">{description}</p>
             <p className="text-lg text-green-600">€{price}</p>
-            {/* <p className="text-sm text-gray-500">{inStock ? "In stock" : "Out of stock"}</p> */}
+            <p className="text-sm text-red-500">Rating: {rating.rate}</p>
+            <p className="text-sm text-gray-500">{rating.count > 0 ? `In stock: ${rating.count}`: "Out of stock"}</p>
             <div className="flex justify-between items-center">
                 <button className="border-2 border-blue-500 rounded hover:text-white hover:bg-blue-500 text-blue-500 bg-white p-2 mt-2 text-blue-500 cursor-pointer ">Add to cart</button>
                 <button className={`${isFavorite ? "text-red-500 " : "text-blue-500"} cursor-pointer`}
