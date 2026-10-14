@@ -14,18 +14,22 @@ function App() {
     async function fetchProducts() {
         try{
             const response = await fetch("https://fakestoreapi.com/products")
+            if (!response.ok) {
+              throw new Error(`Request failed with status ${response.status}`);
+            } 
+             
             const data = await response.json()
             setProducts(data)
             setLoading(false)
             setError(null)
+            
         }
-        catch(e){
-            console.error("Error fetching products:", e)
+        catch(err){
+            console.error("Error fetching products:", err)
             setLoading(false)
-            setError("Failed to fetch products. Please try again later.")
+            setError(err instanceof Error ? err.message : "Something went wrong");
         }
     }
-
     fetchProducts()
   }, [])
   
@@ -33,8 +37,12 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+
       {loading ? (
-        <p className="flex flex-1 font-bold text-xl text-center justify-center items-center text-blue-500">Loading products...</p>
+        <div className="flex-1 flex flex-col justify-center items-center gap-4">
+        <div className="w-10 h-10 border-4 border-gray-200 border-t-blue-500 rounded-full animate-spin "></div>
+        <p className="text-gray-500">Loading products...</p>
+    </div>
       ) : (
         error ? (
           <p className="flex flex-1 font-bold text-xl text-center justify-center items-center text-red-500">{error}</p>
@@ -42,6 +50,7 @@ function App() {
           <Main products={products} />
         )
       )}
+
       <Footer />
     </div>
   )

@@ -9,7 +9,7 @@ const Main = ({ products }: MainProps) => {
     return (
         <main className="flex-1 
                         grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
-                         justify-start items-start">
+                         justify-start">
             {products.map((product) => (
                 <ProductCard
                     key={product.id}
