@@ -1,9 +1,14 @@
 export interface Product {
     id: number;
-    name: string;
+    title: string;
     price: number;
     description: string;
-    category: "Audio" | "Peripherals" | "Accessories" | "Mobile";
-    image?: string;
-    inStock: boolean;
+    category: string;
+    image: string;
+    rating: Rating;
+}
+
+export interface Rating {
+    rate: number;
+    count: number;
 }

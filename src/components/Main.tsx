@@ -14,11 +14,10 @@ const Main = ({ products }: MainProps) => {
                 <ProductCard
                     key={product.id}
                     category={product.category}
-                    name={product.name}
+                    title={product.title}
                     price={product.price}
                     description={product.description}
                     image={product.image}
-                    inStock={product.inStock}
                 />
             ))}
         </main>
