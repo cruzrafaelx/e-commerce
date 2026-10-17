@@ -1,11 +1,13 @@
+
 import type { Product } from "../types"
 import ProductCard from "./ProductCard"
 
 interface MainProps {
-    products: Product[]
+    products: Product[];
+    onAddToCart: (product: Product) => void
 }
 
-const Main = ({ products }: MainProps) => {
+const Main = ({ products, onAddToCart }: MainProps) => {
     return (
         <main className="flex-1 
                         grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
@@ -19,6 +21,7 @@ const Main = ({ products }: MainProps) => {
                     description={product.description}
                     image={product.image}
                     rating={product.rating}
+                    onAddToCart={() => onAddToCart(product)}
                 />
             ))}
         </main>
