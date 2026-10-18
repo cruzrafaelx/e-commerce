@@ -32,7 +32,7 @@ const ProductDetails = () => {
     if (!product) return <p>Loading...</p>
     
     return(
-        <div>
+        <div className="flex-1">
             <h1>{product.title}</h1>
             <img src={product.image} alt={product.title} />
             <p>{product.description}</p>
