@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom"
+import { useCart } from "../context/CartContent";
 
-type HeaderProps = {
-  cartLength: number;
-}
+function Header()  {
 
-function Header({ cartLength }: HeaderProps)  {
+   const { cart } = useCart()
     return (
       <header className="bg-blue-500 text-white p-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold">Taljer</h1>
@@ -13,7 +12,7 @@ function Header({ cartLength }: HeaderProps)  {
           <a href="/products" className="text-white mr-4 hover:underline">Products</a>
           <a href="/about" className="text-white mr-4 hover:underline">About</a>
           <Link to="/cart">
-            <button className="border p-2 rounded cursor-pointer hover:bg-white hover:text-blue-500">View Cart: {cartLength}</button>
+            <button className="border p-2 rounded cursor-pointer hover:bg-white hover:text-blue-500">View Cart: {cart.length}</button>
           </Link>
         </nav>
       </header>

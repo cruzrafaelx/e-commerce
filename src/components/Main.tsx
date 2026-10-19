@@ -1,14 +1,15 @@
 
-import type { Product } from "../types"
+import useProducts from "../hooks/useProducts";
+
 import ProductCard from "./ProductCard"
+import { useCart } from "../context/CartContent"
 
-interface MainProps {
-    products: Product[];
-    //return void for functions that don'r return anything
-    onAddToCart: (product: Product) => void;
-}
 
-const Main = ({ products, onAddToCart }: MainProps) => {
+const Main = () => {
+
+    const { products } = useProducts()
+    const { addToCart } = useCart()
+
     return (
         <main className="flex-1 
                         grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
@@ -23,7 +24,7 @@ const Main = ({ products, onAddToCart }: MainProps) => {
                     description={product.description}
                     image={product.image}
                     rating={product.rating}
-                    onAddToCart={() => onAddToCart(product)}
+                    onAddToCart={() => addToCart(product)}
                 />
             ))}
         </main>

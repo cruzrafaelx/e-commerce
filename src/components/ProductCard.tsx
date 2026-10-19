@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import type { Product } from "../types"
 
-// Omit the "id" property from Product type and add onAddToCart function
+//Product type and add onAddToCart function
 type ProductCardProps = Product & {onAddToCart: () => void}
 
 const ProductCard = ({ id, title, price, description, category, image, rating, onAddToCart }: ProductCardProps) => {

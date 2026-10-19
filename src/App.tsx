@@ -1,6 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react"
-import type { Product } from "./types"
+// import { useState } from "react"
+// import type { Product } from "./types"
+
+//Contexts
+import { CartProvider } from "./context/CartContent";
 
 //Hooks
 import useProducts from "./hooks/useProducts"
@@ -20,30 +23,14 @@ function App() {
   // Loading and error state, product listing from useProducts hook
   const { products, loading, error } = useProducts()
 
-  // State for the cart
-  const [cart, setCart] = useState<Product[]>([]);
-
-  // Function to add a product to the cart
-  const handleAddToCart = (product: Product) => {
-    setCart((prevCart) => [...prevCart, product]);
-    console.log(`Added ${product.title} to cart. Total items in cart: ${cart.length + 1}`)
-    console.log("Current cart contents:", [...cart, product]);
-  };
-
-  //Function to remove a product from the cart
-  const handleRemoveFromCart = (indexToRemove: number) => {
-    setCart((prevCart) => prevCart.filter((_, index) => index !== indexToRemove))
-  }
-
-  
-
   return (
     <Router>
       <div className="min-h-screen flex flex-col">
 
+      <CartProvider>
         {/* Render of head */}
-        <Header cartLength={cart.length}/>
-
+        <Header/>
+      
         <Routes>
 
           {/* Dynamic rendering of loading, error and main page */}
@@ -74,10 +61,10 @@ function App() {
                   onRemoveFromCart={handleRemoveFromCart}/>}/>
 
         </Routes>
-        
+      </CartProvider>
 
-        {/* Render of footer */}
-        <Footer />
+      {/* Render of footer */}
+      <Footer />
       </div>
     </Router>
   )
