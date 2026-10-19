@@ -16,6 +16,8 @@ const Main = ({ products }: MainProps) => {
                         w-full max-w-7xl mx-auto mt-8 px-4
                         grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
                         justify-start">
+            
+            
             {products.map((product) => (
                 <ProductCard
                     key={product.id}
