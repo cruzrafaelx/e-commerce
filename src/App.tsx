@@ -14,6 +14,8 @@ import Main from "./components/Main"
 import Footer from "./components/Footer"
 
 //Pages
+import About from "./pages/About";
+import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart"
 
@@ -49,11 +51,17 @@ function App() {
             )}
           />
 
+          {/* Page for products */}
+          <Route path="/products" element={<Products/>}></Route>
+
+          {/* Page for About */}
+          <Route path="/about" element={<About/>}></Route>
+
           {/* Page for single products */}
           <Route path="/products/:id" element={<ProductDetails/>}/>
 
           {/* Page for cart */}
-          <Route path="/cart" element={<Cart products={products}/>}/>
+          <Route path="/cart" element={<Cart/>}/>
 
         </Routes>
       </CartProvider>
