@@ -4,7 +4,8 @@ import ProductCard from "./ProductCard"
 
 interface MainProps {
     products: Product[];
-    onAddToCart: (product: Product) => void
+    //return void for functions that don'r return anything
+    onAddToCart: (product: Product) => void;
 }
 
 const Main = ({ products, onAddToCart }: MainProps) => {

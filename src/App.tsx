@@ -1,8 +1,9 @@
-import axios from "axios"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import type { Product } from "./types"
 
+//Hooks
+import useProducts from "./hooks/useProducts"
 
 //Components
 import Header from "./components/Header"
@@ -16,14 +17,8 @@ import Cart from "./pages/Cart"
 
 function App() {
 
-  //State for products from API
-  const [products, setProducts] = useState<Product[]>([])
-
-  //State for loading pages
-  const [loading, setLoading] = useState<boolean>(true)
-
-  //State for error handling
-  const [error, setError] = useState<string | null>(null)
+  // Loading and error state, product listing from useProducts hook
+  const { products, loading, error } = useProducts()
 
   // State for the cart
   const [cart, setCart] = useState<Product[]>([]);
@@ -35,35 +30,11 @@ function App() {
     console.log("Current cart contents:", [...cart, product]);
   };
 
+  //Function to remove a product from the cart
+  const handleRemoveFromCart = (indexToRemove: number) => {
+    setCart((prevCart) => prevCart.filter((_, index) => index !== indexToRemove))
+  }
 
-
-  //Fetch data from fake API
-  useEffect(() => {
-    async function fetchProducts() {
-        try{
-            const response = await axios.get<Product[]>("https://fakestoreapi.com/products")
-            
-            //Main difference between fetch and axios is that axios automatically parses the response as JSON, while fetch requires you to call response.json() to parse the response.
-            //It also automatically throws an error for non-2xx status codes, while fetch does not. You have to check the response.ok property to determine if the request was successful or not.
-
-            setProducts(response.data)
-            setLoading(false)
-            setError(null)
-            
-        }
-
-        catch(err){
-            console.error("Error fetching products:", err)
-            setLoading(false)
-            setError(err instanceof Error ? err.message : "Something went wrong");
-        }
-
-        finally {
-            setLoading(false)
-        }
-    }
-    fetchProducts()
-  }, [])
   
 
   return (
@@ -88,7 +59,8 @@ function App() {
               ) : (
                 <Main
                   products={products} 
-                  onAddToCart={handleAddToCart} />
+                  onAddToCart={handleAddToCart}
+                   />
               )
             )}
           />
@@ -97,7 +69,9 @@ function App() {
           <Route path="/products/:id" element={<ProductDetails/>}/>
 
           {/* Page for cart */}
-          <Route path="/cart" element={<Cart cart={cart}/>}/>
+          <Route path="/cart" element={
+            <Cart cart={cart}
+                  onRemoveFromCart={handleRemoveFromCart}/>}/>
 
         </Routes>
         
