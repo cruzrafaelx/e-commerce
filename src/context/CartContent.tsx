@@ -39,10 +39,12 @@ export function CartProvider({children}: {children: ReactNode}) {
 
 //3. The custom hook: useCart() for using the cart
 export function useCart() {
+    
     const context = useContext(CartContext)
+
     if(context === undefined) {
         throw new Error("useCart must be used inside a <CartProvider>")
     }
-    
+
     return context
 }

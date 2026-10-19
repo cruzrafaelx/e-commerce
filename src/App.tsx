@@ -44,10 +44,7 @@ function App() {
               error ? (
                 <p className="flex flex-1 font-bold text-xl text-center justify-center items-center text-red-500">{error}</p>
               ) : (
-                <Main
-                  products={products} 
-                  onAddToCart={handleAddToCart}
-                   />
+                <Main products={products}/>
               )
             )}
           />
@@ -56,9 +53,7 @@ function App() {
           <Route path="/products/:id" element={<ProductDetails/>}/>
 
           {/* Page for cart */}
-          <Route path="/cart" element={
-            <Cart cart={cart}
-                  onRemoveFromCart={handleRemoveFromCart}/>}/>
+          <Route path="/cart" element={<Cart products={products}/>}/>
 
         </Routes>
       </CartProvider>

@@ -1,13 +1,14 @@
 
-import useProducts from "../hooks/useProducts";
-
 import ProductCard from "./ProductCard"
+import type { Product } from "../types"
 import { useCart } from "../context/CartContent"
 
+interface MainProps {
+    products: Product[];
+}
 
-const Main = () => {
+const Main = ({ products }: MainProps) => {
 
-    const { products } = useProducts()
     const { addToCart } = useCart()
 
     return (
