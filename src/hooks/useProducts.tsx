@@ -1,11 +1,11 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
+import { useErrorBoundary } from "react-error-boundary"
 import type { Product } from "../types"
 
 interface UseProductsResult {
     products: Product[];
     loading: boolean;
-    error: string | null;
 }
 
 function useProducts(): UseProductsResult {
@@ -16,19 +16,17 @@ function useProducts(): UseProductsResult {
   //State for loading pages
   const [loading, setLoading] = useState<boolean>(true)
 
-  //State for error handling
-  const [error, setError] = useState<string | null>(null)
+  const { showBoundary } = useErrorBoundary()
 
   useEffect(() => {
     async function fetchProducts() {
         try{
             const response = await axios.get<Product[]>("https://fakestoreapi.com/products")
             setProducts(response.data)
-            setError(null)
         }
         
         catch (err){
-            setError(err instanceof Error ? err.message : "Something went wrong")
+            showBoundary(err)
         }
 
         finally{
@@ -37,9 +35,9 @@ function useProducts(): UseProductsResult {
     }
 
     fetchProducts()
-  }, [])
+  }, [showBoundary])
 
-  return { products, loading, error}
+  return { products, loading }
 }
 
 

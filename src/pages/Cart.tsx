@@ -5,8 +5,10 @@ import { useCart } from "../context/CartContent";
 
 const Cart = () => {
 
+  throw new Error("crash")
+
   const { cart, removeFromCart } = useCart()
-  console.log(cart)
+  
   return (
     <div className="flex-1 flex">
 

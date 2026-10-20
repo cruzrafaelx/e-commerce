@@ -1,15 +1,22 @@
 
 import ProductCard from "./ProductCard"
-import type { Product } from "../types"
 import { useCart } from "../context/CartContent"
+import useProducts from "../hooks/useProducts"
 
-interface MainProps {
-    products: Product[];
-}
+const Main = () => {
 
-const Main = ({ products }: MainProps) => {
+    //Hook for loading and error state, product listing
+    const { products, loading, error } = useProducts() 
 
+    //Context for cart, addToCart, and removeFromCart
     const { addToCart } = useCart()
+
+    if(loading) return(
+        <div className="flex-1 flex flex-col justify-center items-center gap-4">
+            <div className="w-10 h-10 border-4 border-gray-200 border-t-blue-500 rounded-full animate-spin "></div>
+            <p className="text-gray-500">Loading products...</p>
+        </div>
+    )
 
     return (
         <main className="flex-1 
