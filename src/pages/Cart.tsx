@@ -5,7 +5,7 @@ import { FaArrowLeftLong } from "react-icons/fa6"
 
 const Cart = () => {
 
-  const { cart, removeFromCart } = useCart()
+  const { cart, removeFromCart, addToCart, reduceCartItem } = useCart()
   
   //Modified shape of CartItem with added itemCount
   type CartItem = Product & { itemCount: number }
@@ -29,7 +29,16 @@ const Cart = () => {
               <p className="uppercase">{product.title}</p>
               <p className="line-clamp-1 text-sm text-black-500">{product.description}</p>
               <p className="text-md text-black-600"><strong>€{product.price.toFixed(2)}</strong></p>
-              <p>{product.itemCount}</p>
+              <div className="flex">
+                <button className="border p-1"
+                        onClick={()=>reduceCartItem(product)}
+                >-</button>
+                <p className="border p-2">{product.itemCount}</p>
+                <button className="border p-2"
+                        onClick={()=>addToCart(product)}
+                >+</button>
+              </div>
+              
               <button onClick={()=> removeFromCart(index)}
                 className="text-sm mt-5 text-red-500 cursor-pointer"
                 >Remove article from cart</button>

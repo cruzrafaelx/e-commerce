@@ -5,8 +5,9 @@ import type { Product } from "../types"
 type CartItem = Product & { itemCount: number }
 
 interface CartContextValue {
-    cart: CartItem[] //Array of product;
+    cart: CartItem[];
     addToCart: (product: Product) => void;
+    reduceCartItem: (product: Product) => void;
     removeFromCart: (index: number) => void;
 }
 
@@ -19,7 +20,7 @@ export function CartProvider({children}: {children: ReactNode}) {
     //cart state
     const [cart, setCart] = useState<CartItem[]>([])
 
-    //add to cart function
+    //add item to cart 
     const addToCart = (product: Product) => {
         setCart((prevCart) => {
             const isInCart = prevCart.some((item) => item.id === product.id)
@@ -31,20 +32,33 @@ export function CartProvider({children}: {children: ReactNode}) {
 
             //Product already in cart: new array, with a new object for the matching item
             return prevCart.map((item) =>
-                item.id === product.id
-                    ? { ...item, itemCount: item.itemCount + 1 }
-                    : item
+                item.id === product.id ? 
+                { ...item, itemCount: item.itemCount + 1 } :
+                item
             )
         })
     }
 
-    //remove from cart function
+    //reduce item number
+    const reduceCartItem = (product: Product) => {
+        setCart((prevCart) =>
+            prevCart.map((item) =>
+                    item.id === product.id ?
+                    { ...item, itemCount: item.itemCount - 1 } :
+                    item
+                )
+                //Remove items whose count reached 0
+                .filter((item) => item.itemCount > 0)
+        )
+    }
+
+    //remove item from cart 
     const removeFromCart = (indexToRemove: number) => {
         setCart((prevCart) => prevCart.filter((_, index) => index !== indexToRemove))
     }
 
     return(
-        <CartContext value={{ cart, addToCart, removeFromCart}}>
+        <CartContext value={{ cart, addToCart, reduceCartItem, removeFromCart }}>
             {children}
         </CartContext>
     )
