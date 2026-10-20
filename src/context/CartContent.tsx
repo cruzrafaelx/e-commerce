@@ -1,9 +1,11 @@
 import { createContext, useContext, useState, type ReactNode } from "react"
 import type { Product } from "../types"
 
-//shape the value of CartContext
+//Modified shape of CartItem with added itemCount
+type CartItem = Product & { itemCount: number }
+
 interface CartContextValue {
-    cart: Product[] //Array of product;
+    cart: CartItem[] //Array of product;
     addToCart: (product: Product) => void;
     removeFromCart: (index: number) => void;
 }
@@ -15,13 +17,25 @@ const CartContext = createContext<CartContextValue | undefined>(undefined)
 export function CartProvider({children}: {children: ReactNode}) {
     
     //cart state
-    const [cart, setCart] = useState<Product[]>([])
+    const [cart, setCart] = useState<CartItem[]>([])
 
     //add to cart function
     const addToCart = (product: Product) => {
-        setCart((prevCart) => [...prevCart, product])
-        console.log(`Added ${product.title} to cart. Total items in cart: ${cart.length + 1}`)
-        console.log("Current cart contents:", [...cart, product])
+        setCart((prevCart) => {
+            const isInCart = prevCart.some((item) => item.id === product.id)
+
+            //Product not in cart yet: add it with a count of 1
+            if (!isInCart) {
+                return [...prevCart, { ...product, itemCount: 1 }]
+            }
+
+            //Product already in cart: new array, with a new object for the matching item
+            return prevCart.map((item) =>
+                item.id === product.id
+                    ? { ...item, itemCount: item.itemCount + 1 }
+                    : item
+            )
+        })
     }
 
     //remove from cart function
