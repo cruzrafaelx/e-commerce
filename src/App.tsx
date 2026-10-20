@@ -5,7 +5,6 @@ import Header from "./components/Header"
 import Main from "./components/Main"
 import Footer from "./components/Footer"
 import ErrorFallback from "./components/ErrorFallback"
-import { ErrorBoundary } from "react-error-boundary";
 
 //Pages
 import About from "./pages/About";
@@ -13,6 +12,8 @@ import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart"
 
+//Hooks
+import { ErrorBoundary } from "react-error-boundary";
 
 function App() {
 

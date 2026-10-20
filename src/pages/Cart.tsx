@@ -5,8 +5,6 @@ import { useCart } from "../context/CartContent";
 
 const Cart = () => {
 
-  throw new Error("crash")
-
   const { cart, removeFromCart } = useCart()
   
   return (
