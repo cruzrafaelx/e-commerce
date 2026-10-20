@@ -1,13 +1,9 @@
-import { useState, type ChangeEvent } from "react"
 import ProductCard from "./ProductCard"
 import { useCart } from "../context/CartContent"
 import useProducts from "../hooks/useProducts"
+import { Link } from "react-router-dom"
 
 const Main = () => {
-
-    //States for the search filter
-    const [searchTerm, setSearchTerm] = useState("")
-    const [selectedCategory, setSelectedCategory] = useState("")
 
     //Hook for loading state and product listing
     const { products, loading  } = useProducts() 
@@ -15,27 +11,7 @@ const Main = () => {
     //Context for cart, addToCart, and removeFromCart
     const { addToCart } = useCart()
 
-    //Unique categories
-    //new Set() -> filters redundancy
-    const categories = [...new Set(products.map((product) => product.category))]
-
-    //Contains filtered list of products
-    const filteredProducts = products.filter((product) => {
-        const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase())
-        const matchesCategory = selectedCategory === "" || product.category === selectedCategory
-        return matchesSearch && matchesCategory
-    })
-
-    //handle search 
-    function handleSearch(e: ChangeEvent<HTMLInputElement>){
-        setSearchTerm(e.target.value)
-    }
-
-    //handle select category 
-    function handleFilterChange(e: ChangeEvent<HTMLSelectElement>){
-        setSelectedCategory(e.target.value)
-    }
-
+    // const [showAll, setShowAll] = useState(false)
 
     if(loading) return(
         <div className="flex-1 flex flex-col justify-center items-center gap-4">
@@ -48,54 +24,28 @@ const Main = () => {
         <main className="flex-1 flex flex-col
                         w-full max-w-7xl mx-auto mt-8 px-4
                         justify-start">
-            <div className="flex gap-10 px-5">
-                <input
-                type="text"
-                placeholder="Search products..."
-                value={searchTerm}
-                onChange={handleSearch}
-                className="w-100 p-2 rounded border border-blue-500 bg-white"
-                />
-
-                <select
-                value={selectedCategory}
-                onChange={handleFilterChange}
-                className="p-2 rounded border border-blue-500 bg-white"
-                >
-                    <option value="">All categories</option>
-                    {categories.map((category) => (
-                        <option key={category} value={category}>
-                        {category}
-                        </option>
-                    ))}
-                </select>
-            </div>
             
-            {
-                filteredProducts.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                        {filteredProducts.map((product) => (
-                            <ProductCard
-                                key={product.id}
-                                id={product.id}
-                                category={product.category}
-                                title={product.title}
-                                price={product.price}
-                                description={product.description}
-                                image={product.image}
-                                rating={product.rating}
-                                onAddToCart={() => addToCart(product)}
-                            />
-                        ))}
-                    </div>
-                )  :
-                <p className="flex-1 flex justify-center items-center text-3xl text-center text-blue-600">Sorry, We're not selling your searched product!</p>
-            }
-            
-
-
+            {<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {products.slice(0, 8).map((product) => (
+                    <ProductCard
+                        key={product.id}
+                        id={product.id}
+                        category={product.category}
+                        title={product.title}
+                        price={product.price}
+                        description={product.description}
+                        image={product.image}
+                        rating={product.rating}
+                        onAddToCart={() => addToCart(product)}
+                    />
+                ))}
+            </div>}
+            <Link to="/products" className="flex justify-center mx-auto my-5 w-50 p-3 border border-blue-500 bg-blue-500 text-white hover:text-blue-500 hover:border hover:border-blue-500 hover:bg-white cursor-pointer">
+                See more
+            </Link>
         </main>
     )
+   
 }
 
 export default Main
