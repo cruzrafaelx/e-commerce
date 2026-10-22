@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { useCart } from "../context/CartContent"
 import { useErrorBoundary } from "react-error-boundary"
+import { FaArrowLeftLong } from "react-icons/fa6"
 import axios from "axios"
 import type { Product } from "../types"
 
@@ -39,16 +40,23 @@ const ProductDetails = () => {
     if (!product) return <p>Loading...</p>
     
     return(
-        <div className="flex-1 flex justify-center">
-            <div className="flex gap-30 my-auto px-20 justify-space-between">
+        <div className="flex-1 flex flex-col px-20  justify-center">
+            <Link
+                to="/"
+                className="group self-start flex items-center gap-2 mb-6 text-sm font-medium text-gray-600 transition-colors hover:text-blue-500"
+                >
+                <FaArrowLeftLong className="transition-transform group-hover:-translate-x-1" />
+                Continue shopping
+            </Link>
+            <div className="flex gap-30 justify-space-between">
                 <img className="flex-1 w-80 h-130 shrink-0 rounded-lg bg-gray-100 object-contain p-4" src={product.image} alt={product.title} />
                 <div className="flex-1 flex flex-col gap-3">
                 <p className="text-md uppercase text-blue-500">{product.category}</p>
                 <p className="text-3xl uppercase">{product.title}</p>
-                <p className="text-lg text-gray-400">{product.rating.rate} stars | {product.rating.count} reviews</p>
+                <p className="text-lg text-gray-600">{product.rating.rate} stars | {product.rating.count} reviews</p>
                 <p className="text-lg text-black-500">{product.description}</p>
                 <p className="text-2xl text-black-600"><strong>€{product.price.toFixed(2)}</strong></p>
-                <button className=" p-2 mt-2 text-lg border border-blue-500 bg-blue-500 text-white hover:text-blue-500 hover:border hover:border-blue-500 hover:bg-white cursor-pointer" onClick={()=>addToCart(product)}>Add to cart</button>
+                <button className="mt-3 w-full rounded-2xl bg-blue-500 py-3 text-white font-semibold uppercase hover:bg-blue-600 cursor-pointer" onClick={()=>addToCart(product)}>Add to cart</button>
                 </div>
             </div>
         </div>

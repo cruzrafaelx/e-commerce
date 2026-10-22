@@ -1,11 +1,13 @@
 import { createContext, useContext, useState, type ReactNode } from "react"
 import type { Product } from "../types"
 
-//Modified shape of CartItem with added itemCount
+//Modified shape of CartItem with added itemCount for Cart UI
 type CartItem = Product & { itemCount: number }
 
+//Context typing
 interface CartContextValue {
     cart: CartItem[];
+    cartSum: number;
     addToCart: (product: Product) => void;
     reduceCartItem: (product: Product) => void;
     removeFromCart: (index: number) => void;
@@ -20,17 +22,22 @@ export function CartProvider({children}: {children: ReactNode}) {
     //cart state
     const [cart, setCart] = useState<CartItem[]>([])
 
+    //Cart total sum state
+    const cartSum = cart.reduce((sum, item) => sum + item.price * item.itemCount, 0)
+
     //add item to cart 
     const addToCart = (product: Product) => {
         setCart((prevCart) => {
+
+            //Check if item is in cart
             const isInCart = prevCart.some((item) => item.id === product.id)
 
-            //Product not in cart yet: add it with a count of 1
+            //Product not in cart yet, add it with a count of 1
             if (!isInCart) {
                 return [...prevCart, { ...product, itemCount: 1 }]
             }
 
-            //Product already in cart: new array, with a new object for the matching item
+            //Product already in cart, new array, with a new object for the matching item
             return prevCart.map((item) =>
                 item.id === product.id ? 
                 { ...item, itemCount: item.itemCount + 1 } :
@@ -39,7 +46,7 @@ export function CartProvider({children}: {children: ReactNode}) {
         })
     }
 
-    //reduce item number
+    //reduce item number in cart
     const reduceCartItem = (product: Product) => {
         setCart((prevCart) =>
             prevCart.map((item) =>
@@ -58,7 +65,7 @@ export function CartProvider({children}: {children: ReactNode}) {
     }
 
     return(
-        <CartContext value={{ cart, addToCart, reduceCartItem, removeFromCart }}>
+        <CartContext value={{ cart, cartSum, addToCart, reduceCartItem, removeFromCart }}>
             {children}
         </CartContext>
     )

@@ -60,7 +60,7 @@ const Products = () => {
                 onChange={handleFilterChange}
                 className="p-2 rounded border border-blue-500 bg-white"
                 >
-                    <option value="">All categories</option>
+                    <option value="" >All categories</option>
                     {categories.map((category) => (
                         <option key={category} value={category}>
                         {category}
