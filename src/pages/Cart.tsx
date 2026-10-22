@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import type { Product } from "../types"
 import { useCart } from "../context/CartContent";
-import { FaArrowLeftLong,FaTrashCan } from "react-icons/fa6"
+import { FaArrowLeftLong, FaCartShopping, FaTrashCan } from "react-icons/fa6"
 
 const Cart = () => {
 
@@ -56,7 +56,21 @@ const Cart = () => {
                 ))
               ) :
 
-              <p className="flex-1 flex justify-center items-center text-3xl text-center text-blue-500">Your cart is empty!</p>
+              <div className="flex-1 flex flex-col justify-center items-center gap-4 text-center">
+                <div className="flex justify-center items-center w-24 h-24 rounded-full bg-gray-100">
+                  <FaCartShopping className="text-4xl text-blue-500" />
+                </div>
+                <h2 className="text-2xl font-bold">Your cart is empty</h2>
+                <p className="text-gray-600 max-w-sm">
+                  Looks like you haven't added anything yet. Find something you'll love in our collection.
+                </p>
+                <Link
+                  to="/products"
+                  className="mt-2 rounded-2xl bg-blue-500 px-6 py-3 text-white font-semibold uppercase transition-colors hover:bg-blue-600"
+                >
+                  Browse products
+                </Link>
+              </div>
             }
           </div>
           
@@ -93,7 +107,6 @@ const Cart = () => {
               </button>
             </div>
           </div>
-
         </div>
       </div>
     </div>

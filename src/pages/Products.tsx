@@ -2,6 +2,9 @@ import ProductCard from "../components/ProductCard"
 import { useCart } from "../context/CartContent"
 import useProducts from "../hooks/useProducts"
 import { useState, type ChangeEvent } from "react"
+import { Link } from "react-router-dom"
+import { FaCartShopping } from "react-icons/fa6"
+
 
 const Products = () => {
 
@@ -87,7 +90,16 @@ const Products = () => {
                         ))}
                     </div>
                 )  :
-                <p className="flex-1 flex justify-center items-center text-3xl text-center text-blue-500">Sorry, We're not selling your searched product!</p>
+                <div className="flex-1 flex flex-col justify-center items-center gap-4 text-center">
+                    <div className="flex justify-center items-center w-24 h-24 rounded-full bg-gray-100">
+                        <FaCartShopping className="text-4xl text-blue-500" />
+                    </div>
+                    <h2 className="text-2xl font-bold">No found match!</h2>
+                    <p className="text-gray-600 max-w-sm">
+                        It seems like we still need to create this product you are looking for!
+                    </p>
+                    
+                </div>
             }
         </main>
     )

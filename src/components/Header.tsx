@@ -8,12 +8,12 @@ function Header()  {
    const { cart } = useCart()
    
     return (
-      <header className="bg-blue-500 text-white p-4 flex justify-between items-center">
+      <header className="flex bg-blue-500 py-4 px-10 justify-between items-center font-semibold text-white   ">
         <h1 className="text-2xl font-bold">Taljer</h1>
         <nav className="flex">
-          <Link to="/" className="text-white mr-4 hover:underline">Home</Link>
-          <Link to="/products" className="text-white mr-4 hover:underline">Products</Link>
-          <Link to="/about" className="text-white mr-4 hover:underline">About</Link>
+          <Link to="/" className="uppercase text-semibold text-white mr-4 hover:underline">Home</Link>
+          <Link to="/products" className="uppercase text-white mr-4 hover:underline">Products</Link>
+          <Link to="/about" className="uppercase text-white mr-4 hover:underline">About</Link>
           <Link to="/cart" className="relative">
             <FaShoppingCart className="text-2xl" />
             {cart.length > 0 && (

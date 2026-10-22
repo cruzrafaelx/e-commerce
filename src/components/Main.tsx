@@ -26,12 +26,12 @@ const Main = () => {
     )
 
     return (
-        <main className="flex-1 flex flex-col gap-5 mx-auto mt-8 px-4 max-w-7xl w-full">
+        <main className="flex-1 flex flex-col gap-3 mx-auto mt-8 px-4 max-w-7xl w-full">
             <div className="flex m-4 gap-5">
                 <video src={brandVideo} autoPlay muted loop playsInline
                         className="w-full max-w-180 rounded-xl "/>
-                <div className="flex flex-col gap-5">
-                    <span className="uppercase font-semibold text-9xl text-blue-500 tracking-wide">Taljer.</span>
+                <div className="flex flex-col justify-center gap-3">
+                    <span className="font-semibold text-9xl text-blue-500 tracking-wide">Taljer.</span>
                     <span className="uppercase font-semibold text-7xl text-blue-500 tracking-wide">Made with</span>
                     <Typewriter words={heroWords} className="uppercase font-semibold text-8xl text-blue-500 tracking-wide" />
                 </div>
@@ -55,7 +55,7 @@ const Main = () => {
                 </div>}
             </div>
             
-            <Link to="/products" className="flex justify-center mx-auto my-5 w-50 p-3 border border-blue-500 bg-blue-500 text-white hover:text-blue-500 hover:border hover:border-blue-500 hover:bg-white cursor-pointer">
+            <Link to="/products" className="text-center mx-auto mb-10 w-50 rounded-xl p-3 font-semibold uppercase bg-blue-500 py-3 text-white  hover:bg-blue-600 cursor-pointer">
                 See more
             </Link>
         </main>

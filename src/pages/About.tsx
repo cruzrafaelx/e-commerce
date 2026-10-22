@@ -46,6 +46,7 @@ const About = () => {
 
       {/* Story */}
       <section className="grid md:grid-cols-2 gap-10 items-center">
+
         <div className="flex flex-col gap-4">
           <h2 className="text-2xl font-bold">Our story</h2>
           <p className="text-gray-600">
@@ -58,12 +59,14 @@ const About = () => {
             we look for pieces that work today and still feel right years from now.
           </p>
         </div>
+
         <div className="rounded-xl bg-blue-500 text-white p-10 flex flex-col gap-3">
           <p className="text-sm uppercase tracking-widest text-blue-100">Our promise</p>
           <p className="text-2xl font-semibold leading-snug">
             "Less searching, better choices. If it's on Taljer, it's worth your time."
           </p>
         </div>
+        
       </section>
 
       {/* Values */}
