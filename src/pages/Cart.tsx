@@ -22,9 +22,10 @@ const Cart = () => {
           Continue shopping
         </Link>
 
-        <div className="flex gap-10">
+        <div className="flex gap-10 flex-col lg:flex-row">
           <div className="flex-3 flex flex-col">
             {cart.length > 0 ? (
+              //Cart contennts
               cart.map((product: CartItem, index) => (
                 <div key={index} className="mb-5 flex rounded-xl justify-center items-center bg-gray-100">
                   <img
@@ -57,6 +58,7 @@ const Cart = () => {
                 </div>
               ))
             ) : (
+              // Empty cart message
               <div className="flex-1 flex flex-col justify-center items-center gap-4 text-center">
                 <div className="flex justify-center items-center w-24 h-24 rounded-full bg-gray-100">
                   <FaCartShopping className="text-4xl text-blue-500" />

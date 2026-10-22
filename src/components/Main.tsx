@@ -27,12 +27,14 @@ const Main = () => {
 
   return (
     <main className="flex-1 flex flex-col gap-3 mx-auto mt-8 px-4 max-w-7xl w-full">
-      <div className="flex m-4 gap-5">
+      <div className="flex flex-col lg:flex-row m-4 gap-5">
         <video src={brandVideo} autoPlay muted loop playsInline className="w-full max-w-180 rounded-xl " />
-        <div className="flex flex-col justify-center gap-3">
-          <span className="font-semibold text-9xl text-blue-500 tracking-wide">Taljer.</span>
-          <span className="uppercase font-semibold text-7xl text-blue-500 tracking-wide">Made with</span>
-          <Typewriter words={heroWords} className="uppercase font-semibold text-8xl text-blue-500 tracking-wide" />
+        <div className="flex flex-row lg:flex-col justify-center gap-3">
+          <span className="font-semibold text-6xl sm:text-9xl lg:text-9xl text-blue-500 tracking-wide">Taljer.</span>
+          <div className="flex flex-col justify-center ">
+            <span className="uppercase font-semibold text-4xl lg:text-7xl text-blue-500 tracking-wide">Made with</span>
+            <Typewriter words={heroWords} className="uppercase font-semibold text-5xl lg:text-8xl text-blue-500 tracking-wide" />
+          </div>
         </div>
       </div>
 
