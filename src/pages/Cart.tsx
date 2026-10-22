@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom"
 import type { Product } from "../types"
-import { useCart } from "../context/CartContent";
+import { useCart } from "../context/CartContent"
 import { FaArrowLeftLong, FaCartShopping, FaTrashCan } from "react-icons/fa6"
 
 const Cart = () => {
-
   const { cart, cartSum, removeFromCart, addToCart, reduceCartItem } = useCart()
-  
+
   //Modified shape of CartItem with added itemCount
   type CartItem = Product & { itemCount: number }
 
@@ -25,37 +24,39 @@ const Cart = () => {
 
         <div className="flex gap-10">
           <div className="flex-3 flex flex-col">
-            {cart.length > 0 ? 
-            
-            (
-                cart.map((product: CartItem, index) => (
-                  <div key={index} className="mb-5 flex rounded-xl justify-center items-center bg-gray-100">
-                    <img alt={product.title} src={product.image} className="shrink-0 w-50 h-50 object-contain p-4 rounded mb-2"></img>
-                    <div className="flex-1 p-4">
-                      <p className="text-xs uppercase text-blue-500">{product.category}</p>
-                      <p className="uppercase">{product.title}</p>
-                      <p className="line-clamp-1 text-sm text-gray-600">{product.description}</p>
-                      <p className="text-md text-black-600"><strong>€{product.price.toFixed(2)}</strong></p>
-                      <div className="flex gap-3 mt-5">
-                        <div className="flex border border-blue-500 rounded-2xl">
-                            <button className="px-3 cursor-pointer"
-                                    onClick={()=>reduceCartItem(product)}
-                            >-</button>
-                            <p className="p-2">{product.itemCount}</p>
-                            <button className=" text-black px-3 cursor-pointer"
-                                    onClick={()=>addToCart(product)}
-                            >+</button>
-                        </div>
-                        <button onClick={()=> removeFromCart(index)}
-                            className="text-sm  text-red-500 cursor-pointer"
-                            ><FaTrashCan className="text-xl"/>
+            {cart.length > 0 ? (
+              cart.map((product: CartItem, index) => (
+                <div key={index} className="mb-5 flex rounded-xl justify-center items-center bg-gray-100">
+                  <img
+                    alt={product.title}
+                    src={product.image}
+                    className="shrink-0 w-50 h-50 object-contain p-4 rounded mb-2"
+                  ></img>
+                  <div className="flex-1 p-4">
+                    <p className="text-xs uppercase text-blue-500">{product.category}</p>
+                    <p className="uppercase">{product.title}</p>
+                    <p className="line-clamp-1 text-sm text-gray-600">{product.description}</p>
+                    <p className="text-md text-black-600">
+                      <strong>€{product.price.toFixed(2)}</strong>
+                    </p>
+                    <div className="flex gap-3 mt-5">
+                      <div className="flex border border-blue-500 rounded-2xl">
+                        <button className="px-3 cursor-pointer" onClick={() => reduceCartItem(product)}>
+                          -
                         </button>
-                      </div>    
+                        <p className="p-2">{product.itemCount}</p>
+                        <button className=" text-black px-3 cursor-pointer" onClick={() => addToCart(product)}>
+                          +
+                        </button>
+                      </div>
+                      <button onClick={() => removeFromCart(index)} className="text-sm  text-red-500 cursor-pointer">
+                        <FaTrashCan className="text-xl" />
+                      </button>
                     </div>
                   </div>
-                ))
-              ) :
-
+                </div>
+              ))
+            ) : (
               <div className="flex-1 flex flex-col justify-center items-center gap-4 text-center">
                 <div className="flex justify-center items-center w-24 h-24 rounded-full bg-gray-100">
                   <FaCartShopping className="text-4xl text-blue-500" />
@@ -71,9 +72,9 @@ const Cart = () => {
                   Browse products
                 </Link>
               </div>
-            }
+            )}
           </div>
-          
+
           {/* Cashier */}
           <div className="flex-1 flex justify-start items-start">
             <div className="sticky top-4 w-full flex flex-col gap-3 bg-gray-100 p-6 rounded-xl shadow-sm">
@@ -110,7 +111,6 @@ const Cart = () => {
         </div>
       </div>
     </div>
-    
   )
 }
 

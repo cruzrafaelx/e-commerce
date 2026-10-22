@@ -1,14 +1,14 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter as Router } from "react-router-dom";
+import { StrictMode } from "react"
+import { createRoot } from "react-dom/client"
+import { BrowserRouter as Router } from "react-router-dom"
 
-import './index.css'
-import App from './App.tsx'
+import "./index.css"
+import App from "./App.tsx"
 
 //Contexts
-import { CartProvider } from "./context/CartContent";
+import { CartProvider } from "./context/CartContent"
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Router>
       <CartProvider>

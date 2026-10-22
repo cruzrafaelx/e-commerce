@@ -1,8 +1,7 @@
-import type { FallbackProps } from "react-error-boundary";
+import type { FallbackProps } from "react-error-boundary"
 
 function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
-  
-  const message = error instanceof Error ? error.message : String(error);
+  const message = error instanceof Error ? error.message : String(error)
 
   return (
     <div role="alert" className="flex-1 flex flex-col p-6 my-auto text-center justify-center items-center">
@@ -15,7 +14,7 @@ function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
         Try again
       </button>
     </div>
-  );
+  )
 }
 
-export default ErrorFallback;
+export default ErrorFallback
