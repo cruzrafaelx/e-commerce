@@ -7,7 +7,7 @@ type ProductCardProps = Product & {onAddToCart: () => void}
 const ProductCard = ({ id, title, price, category, image, rating, onAddToCart }: ProductCardProps) => {
 
     return (
-        <div className="flex flex-col m-4 rounded-lg hover:shadow-2xl hover:-translate-y-1 transition duration-400">
+        <div className="flex flex-col m-4 rounded-xl hover:shadow-2xl hover:-translate-y-1 transition duration-400">
             <Link to={`/products/${id}`}>
                 <div className="bg-gray-100 rounded-lg ">
                     <img src={image} alt={title} className="w-full h-50 object-contain p-4 rounded mb-2" />
